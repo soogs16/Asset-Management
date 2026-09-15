@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import QRCodeInput from "./QRCodeInput.jsx";
 import { ArrowLeft } from "lucide-react";
+import { API_URL } from "../config";
 
 export default function AssetRegistryForm({ onCancel, onSuccess }) {
   const [purchaseDate, setPurchaseDate] = useState(null);
@@ -37,7 +38,7 @@ export default function AssetRegistryForm({ onCancel, onSuccess }) {
       purchase_date: formattedDate,
     };
 
-    fetch("http://localhost:5000/api/assets", {
+    fetch(`${API_URL}/api/assets`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

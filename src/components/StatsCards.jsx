@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Package, CheckCircle2, Wrench, Wallet, RefreshCw } from "lucide-react";
-
+import { API_URL } from "../config";
 const StatsCards = () => {
   const [stats, setStats] = useState({
     total_assets: 0,
@@ -12,7 +12,7 @@ const StatsCards = () => {
 
   const fetchStats = () => {
     setLoading(true);
-    fetch("http://localhost:5000/api/dashboard/stats")
+    fetch(`${API_URL}/api/dashboard/stats`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch stats");
         return res.json();

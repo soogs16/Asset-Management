@@ -12,6 +12,7 @@ import {
   LogOut,
   Zap,
 } from "lucide-react";
+import { API_URL } from "../config";
 
 const Sidebar = ({ isOpen, user, canAccess, onLogout }) => {
   const location = useLocation();
@@ -19,10 +20,7 @@ const Sidebar = ({ isOpen, user, canAccess, onLogout }) => {
   const mainNav = [
     { id: "dashboard", label: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { id: "assets", label: "Assets", path: "/assets", icon: Package },
-    { id: "analytics", label: "Analytics", path: "/analytics", icon: BarChart3 },
     { id: "users", label: "Users", path: "/users", icon: Users },
-    { id: "notifications", label: "Notifications", path: "/notifications", icon: Bell, badge: 3 },
-    { id: "activity", label: "Activity", path: "/activity", icon: Activity },
   ];
 
   const supportNav = [

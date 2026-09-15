@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Plus, MoreHorizontal, Trash2 } from "lucide-react";
 import Assetregistryform from "../assets/asset_registry_form.jsx";
 import AssetDetails from "./AssetDetails.jsx"; // 👈 1. Import AssetDetails
+import { API_URL } from "../config";
 
 const Assets = ({ user }) => {
   const [assets, setAssets] = useState([]);
@@ -20,7 +21,7 @@ const Assets = ({ user }) => {
   // Fetch assets from XAMPP backend
   const fetchAssets = () => {
     setLoading(true);
-    fetch("http://localhost:5000/api/assets")
+    fetch(`${API_URL}/api/assets`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch assets");
         return res.json();
@@ -45,7 +46,7 @@ const Assets = ({ user }) => {
     if (!window.confirm("Are you sure you want to delete this asset?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/assets/${assetId}`, {
+      const res = await fetch(`${API_URL}/api/assets/${assetId}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete asset");

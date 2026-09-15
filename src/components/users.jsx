@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Users as UsersIcon, Mail, Building2, Package, RefreshCw, Search, ChevronRight, Shield } from "lucide-react";
 import UserDetails from "./UserDetails";
+import { API_URL } from "../config";
 
 const Users = ({ user: loggedInUser }) => {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,7 @@ const Users = ({ user: loggedInUser }) => {
 
   const fetchUsers = () => {
     setLoading(true);
-    fetch("http://localhost:5000/api/users")
+    fetch(`${API_URL}/api/users`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch users");
         return res.json();

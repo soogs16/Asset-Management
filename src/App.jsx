@@ -121,14 +121,6 @@ function App() {
                           </p>
                         </div>
                         <StatsCards />
-                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 w-full">
-                          <div className="xl:col-span-2 w-full">
-                            <ChartSection />
-                          </div>
-                          <div className="w-full">
-                            <RecentActivity />
-                          </div>
-                        </div>
                         <UserTable />
                       </div>
                     ) : (
@@ -144,20 +136,6 @@ function App() {
                     canAccess("assets") ? (
                       <div className="w-full">
                         <Assets user={user} />
-                      </div>
-                    ) : (
-                      <div className="p-6 text-red-500 font-semibold">Access Denied</div>
-                    )
-                  }
-                />
-
-                {/* Analytics Route */}
-                <Route
-                  path="/analytics"
-                  element={
-                    canAccess("analytics") ? (
-                      <div className="w-full">
-                        <ChartSection fullWidth />
                       </div>
                     ) : (
                       <div className="p-6 text-red-500 font-semibold">Access Denied</div>
@@ -181,33 +159,7 @@ function App() {
                   }
                 />
 
-                {/* Notifications Route */}
-                <Route
-                  path="/notifications"
-                  element={
-                    canAccess("notifications") ? (
-                      <div className="w-full">
-                        <Notifications />
-                      </div>
-                    ) : (
-                      <div className="p-6 text-red-500 font-semibold">Access Denied</div>
-                    )
-                  }
-                />
-
-                {/* Activity Route */}
-                <Route
-                  path="/activity"
-                  element={
-                    canAccess("activity") ? (
-                      <div className="w-full">
-                        <RecentActivity fullWidth />
-                      </div>
-                    ) : (
-                      <div className="p-6 text-red-500 font-semibold">Access Denied</div>
-                    )
-                  }
-                />
+              
 
                 {/* Catch all unknown routes */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />

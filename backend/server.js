@@ -7,11 +7,14 @@ app.use(cors());
 app.use(express.json());
 
 // 1. MySQL Database Connection Pool
+// Database connection reading from Environment Variables
 const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',      // XAMPP Default
-  password: '',      // XAMPP Default
-  database: 'ams',   // Your Database Name
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'ams',
+  port: process.env.DB_PORT || 3306,
+  ssl: process.env.DB_HOST ? { rejectUnauthorized: false } : false
 });
 
 // Test Connection on Startup

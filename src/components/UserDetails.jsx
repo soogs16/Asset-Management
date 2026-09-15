@@ -9,6 +9,7 @@ import {
   Shield,
   Save,
 } from "lucide-react";
+import { API_URL } from "../config";
 
 export default function UserDetails({ userId, onBack, currentUser }) {
   const [data, setData] = useState(null);
@@ -25,7 +26,7 @@ export default function UserDetails({ userId, onBack, currentUser }) {
     setLoading(true);
     setError("");
 
-    fetch(`http://localhost:5000/api/users/${userId}`)
+    fetch(`${API_URL}/api/users/${userId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load user details");
         return res.json();
@@ -51,7 +52,7 @@ export default function UserDetails({ userId, onBack, currentUser }) {
     setError("");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}/role`, {
+      const res = await fetch(`${API_URL}/api/users/${userId}/role`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role: selectedRole }),

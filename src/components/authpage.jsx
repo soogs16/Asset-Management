@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, ArrowRight, Zap, Building2 } from "lucide-react";
-
+import { API_URL } from "../config";
 const UNITS = [
   "MarketMonie",
   "Finventory",
@@ -36,8 +36,8 @@ export default function Auth({ onLogin }) {
 
     try {
       const endpoint = isLogin
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+        ? `${API_URL}/api/auth/login`
+        : `${API_URL}/api/auth/register`;
 
       const body = isLogin
         ? {

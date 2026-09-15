@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
+import { API_URL } from "../config";
 
 export default function EditAssetForm({ asset, onCancel, onSuccess }) {
   const [formData, setFormData] = useState({ ...asset });
@@ -8,7 +9,7 @@ export default function EditAssetForm({ asset, onCancel, onSuccess }) {
 
   // Fetch users for the assignee dropdown
   useEffect(() => {
-    fetch("http://localhost:5000/api/users")
+    fetch(`${API_URL}/api/users`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error(err));
@@ -27,7 +28,7 @@ export default function EditAssetForm({ asset, onCancel, onSuccess }) {
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/assets/${asset.asset_id}`, {
+      const res = await fetch(`${API_URL}/api/assets/${asset.asset_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

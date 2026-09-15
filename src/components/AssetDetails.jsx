@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ArrowLeft, Package, Calendar, DollarSign, MapPin, Store, User, Tag, Pencil, Wrench, AlertTriangle, CheckCircle2 } from "lucide-react";
 import EditAssetForm from "./EditAssetForm";
+import { API_URL } from "../config";
 
 export default function AssetDetails({ assetId, onBack, user, onDeleteSuccess }) {
   const [asset, setAsset] = useState(null);
@@ -12,11 +13,11 @@ export default function AssetDetails({ assetId, onBack, user, onDeleteSuccess })
   const isManager = role === "manager" || isAdmin;
 
   const loadData = () => {
-    fetch(`http://localhost:5000/api/assets/${assetId}`)
+    fetch(`${API_URL}/api/assets/${assetId}`)
       .then(res => res.json())
       .then(data => setAsset(data));
 
-    fetch(`http://localhost:5000/api/assets/${assetId}/maintenance`)
+    fetch(`${API_URL}/api/assets/${assetId}/maintenance`)
       .then(res => res.json())
       .then(data => setTickets(data));
   };
@@ -27,7 +28,7 @@ export default function AssetDetails({ assetId, onBack, user, onDeleteSuccess })
     const issue = window.prompt("Describe the issue with this asset:");
     if (!issue) return;
 
-    await fetch('http://localhost:5000/api/maintenance', {
+    await fetch(`${API_URL}/api/maintenance`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ asset_id: assetId, reported_by: user.name, issue })
@@ -37,7 +38,7 @@ export default function AssetDetails({ assetId, onBack, user, onDeleteSuccess })
 
   const handleResolveTicket = async (ticketId) => {
     if (!isManager) return alert("Only Managers/Admins can resolve tickets.");
-    await fetch(`http://localhost:5000/api/maintenance/${ticketId}/resolve`, {
+    await fetch(`${API_URL}/api/maintenance/${ticketId}/resolve`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ asset_id: assetId })
